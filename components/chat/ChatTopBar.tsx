@@ -1,10 +1,11 @@
 import { USERS } from '@/app/db/dummy'
+import { useSelectedUser } from '@/app/store/SeletedUser';
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 import { Info, X } from 'lucide-react';
 import React from 'react'
 
 const ChatTopBar = () => {
-    const selectedUser=USERS[0];
+    const {selectedUser , setSelectedUser}=useSelectedUser();
   return (
     <div className='w-full h-20 flex p-4 justify-between items-center border-b'>
 			<div className='flex items-center gap-2'>
@@ -21,7 +22,7 @@ const ChatTopBar = () => {
 			<div className='flex gap-2'>
                 
 				<Info className='text-muted-foreground cursor-pointer hover:text-primary' />
-				<X
+				<X onClick={()=>setSelectedUser(null)}
 					className='text-muted-foreground cursor-pointer hover:text-primary'
 					
 				/>

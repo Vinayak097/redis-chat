@@ -15,7 +15,7 @@ const PreferencesTab = () => {
     
 
     return (
-        <div className='flex flex-wrap gap-2 px-1 md:px-2'>
+        <div className='flex flex-wrap gap-2 px-1 md:px-2'>s
             <Button 
                 variant="outline" 
                 size="icon"

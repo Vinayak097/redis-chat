@@ -5,27 +5,30 @@ import { cn } from '@/lib/utils'
 import MessageSkeleton from './MessageSkeleton';
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 import { messages, USERS } from '@/app/db/dummy';
+import { useSelectedUser } from '@/app/store/SeletedUser';
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+import { useQuery } from '@tanstack/react-query';
+import { getMessages } from '@/actions/message.actions';
 
 const MessageList = () => {
-    const  selectedUser  = USERS[0];
-    const user=USERS[0];
-    const isLoading=false;
-    const isMessagesLoading=false;
-    const currentUser=USERS[0];
-	const message=[]
+	const { selectedUser } = useSelectedUser();
+    const {user:currentUser , isLoading:isUserLoading}=useKindeBrowserClient();
+    
+    
+   
+    
+	const {data:messages,isLoading:isMessagesLoading}=useQuery({
+		queryKey:["messages",selectedUser?.id],
+		queryFn:async()=>{
+		if(selectedUser && currentUser){
+			return await getMessages(selectedUser?.id,currentUser?.id);
+		}
+	},
+	enabled: !!selectedUser && !!currentUser && !isUserLoading
+	});
 	const messageContainerRef = useRef<HTMLDivElement>(null);
 
-	// const { data: messages, isLoading: isMessagesLoading } = useQuery({
-	// 	queryKey: ["messages", selectedUser?.id],
-	// 	queryFn: async () => {
-	// 		if (selectedUser && currentUser) {
-	// 			return await getMessages(selectedUser?.id, currentUser?.id);
-	// 		}
-	// 	},
-	// 	enabled: !!selectedUser && !!currentUser && !isUserLoading,
-	// });
-
-	// Scroll to the bottom of the message container when new messages are added
+	
 	useEffect(() => {
 		if (messageContainerRef.current) {
 			messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
@@ -89,5 +92,4 @@ const MessageList = () => {
 		</div>
 	);
 };
-
 export default MessageList
