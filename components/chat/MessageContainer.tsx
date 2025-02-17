@@ -1,5 +1,4 @@
 "use client"
-import { USERS } from '@/app/db/dummy';
 import React, { useEffect } from 'react'
 import ChatTopBar from './ChatTopBar';
 import MessageList from './MessageList';

@@ -1,4 +1,4 @@
-import { USERS } from '@/app/db/dummy'
+
 import { useSelectedUser } from '@/app/store/SeletedUser';
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 import { Info, X } from 'lucide-react';

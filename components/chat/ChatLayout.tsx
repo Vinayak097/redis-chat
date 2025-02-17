@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar'
 import MessageContainer from './MessageContainer'
 import { User } from '@/app/db/dummy'
 import { useSelectedUser } from '@/app/store/SeletedUser'
+import Image from 'next/image'
 
 interface ChatLayoutProps {
     defaultLayout:number[]|undefined
@@ -20,6 +21,7 @@ const ChatLayout = ({defaultLayout=[320,480],users}:ChatLayoutProps) => {
 
             setIsMobile(window.innerWidth<=768)
         }
+        checkScreenWidth();
     })
   return (
     <ResizablePanelGroup 
@@ -53,7 +55,7 @@ const ChatLayout = ({defaultLayout=[320,480],users}:ChatLayoutProps) => {
             {!selectedUser &&(
                 <div className='flex justify-center items-center h-full w-full px-10'>
                 <div className='flex flex-col justify-center items-center gap-4'>
-                    <img src='/logo.png' alt='Logo' className='w-full md:w-2/3 lg:w-1/2' />
+                    <Image src='/logo.png' alt='Logo' className='w-full md:w-2/3 lg:w-1/2' />
                     <p className='text-muted-foreground text-center'>Click on a chat to view the messages</p>
                 </div>
     </div>

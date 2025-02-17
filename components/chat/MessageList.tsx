@@ -3,12 +3,11 @@ import {AnimatePresence} from 'framer-motion'
 import { motion } from "framer-motion"
 import { cn } from '@/lib/utils'
 import MessageSkeleton from './MessageSkeleton';
-import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
-import { messages, USERS } from '@/app/db/dummy';
 import { useSelectedUser } from '@/app/store/SeletedUser';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { useQuery } from '@tanstack/react-query';
 import { getMessages } from '@/actions/message.actions';
+import Image from 'next/image';
 
 const MessageList = () => {
 	const { selectedUser } = useSelectedUser();
@@ -69,7 +68,7 @@ const MessageList = () => {
 								{message.messageType === "text" ? (
 									<span className='bg-accent p-3 rounded-md max-w-xs'>{message.content}</span>
 								) : (
-									<img
+									<Image
 										src={message.content}
 										alt='Message Image'
 										className='border p-2 rounded h-40 md:h-52 object-cover'

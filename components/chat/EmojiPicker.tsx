@@ -6,8 +6,15 @@ import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
 import { useTheme } from 'next-themes'
+interface EmojiSelectData {
+	native: string
+  }
+  interface EmojiPickerProps {
+	onChange: (emoji: string) => void
+  }
+  
 
-const EmojiPicker = ({onChange}: any) => {
+const EmojiPicker = ({onChange}: EmojiPickerProps) => {
   const { theme } = useTheme()
 
   return (
@@ -21,7 +28,7 @@ const EmojiPicker = ({onChange}: any) => {
 					data={data}
 					maxFrequentRows={1}
 					theme={theme === "dark" ? "dark" : "light"}
-					onEmojiSelect={(emoji: any) => onChange(emoji.native)}
+					onEmojiSelect={(emoji: EmojiSelectData) => onChange(emoji.native)}
 				/>
 			</PopoverContent>
 		</Popover>

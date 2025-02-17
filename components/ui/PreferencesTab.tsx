@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button } from './button'
 import { MoonIcon, SunIcon, Volume2, VolumeX } from 'lucide-react'
 import { useTheme } from 'next-themes'
@@ -15,12 +15,15 @@ const PreferencesTab = () => {
     
 
     return (
-        <div className='flex flex-wrap gap-2 px-1 md:px-2'>s
+        <div className='flex flex-wrap gap-2 px-1 md:px-2'>
             <Button 
                 variant="outline" 
                 size="icon"
                 onClick={() => {setTheme('light')
-                  {soundEnabled && playMouseClick()}
+                    if(soundEnabled){
+                        playMouseClick()
+                    }
+                  
                 } }
             >
                 <SunIcon className='size-[1.2rem] text-muted-foreground' />
@@ -29,14 +32,20 @@ const PreferencesTab = () => {
                 variant="outline" 
                 size="icon"
                 onClick={() =>  {setTheme('dark')
-                  {soundEnabled && playMouseClick()}
+                    if(soundEnabled){
+                        playMouseClick()
+                    }
                 } }
             >
                 <MoonIcon className='size-[1.2rem] text-muted-foreground' />
             </Button>
-            <Button variant="outline" size="icon" onClick={()=>{setSoundEnabled(!soundEnabled)
-            {soundEnabled ?playSoundOff(): playSoundOn()}
-
+            <Button variant="outline" size="icon" onClick={()=>{
+                setSoundEnabled(!soundEnabled)
+                if(soundEnabled){
+                    playSoundOff()
+                }else{
+                    playSoundOn()
+                }
             }}>
               {soundEnabled? <Volume2 className='size-[1.2rem] text-muted-foreground' />:
               <VolumeX className='size-[1.2rem] text-muted-foreground'></VolumeX>}
