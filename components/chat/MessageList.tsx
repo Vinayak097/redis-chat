@@ -72,6 +72,8 @@ const MessageList = () => {
 										src={message.content}
 										alt='Message Image'
 										className='border p-2 rounded h-40 md:h-52 object-cover'
+										width={200}
+										height={200}
 									/>
 								)}
 

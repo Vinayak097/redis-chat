@@ -16,22 +16,17 @@ declare global {
 }
 
 // Create our instances with proper typing
-export const pusherServer =
-    (globalThis as GlobalPusher).pusherServer ||
-    new PusherServer({
-        appId: process.env.PUSHER_APP_ID!,
-        key: process.env.PUSHER_APP_KEY!,
-        secret: process.env.PUSHER_APP_SECRET!,
-        cluster: process.env.PUSHER_APP_CLUSTER!,
-        useTLS: true,
-    });
+export const pusherServer = new PusherServer({
+    appId: process.env.PUSHER_APP_ID!,
+    key: 'aeeac1f661fd56784a9b',  // your existing key
+    secret: process.env.PUSHER_APP_SECRET!,
+    cluster: 'ap2',  // replace with your cluster
+    useTLS: true,
+  })
 
-export const pusherClient =
-    (globalThis as GlobalPusher).pusherClient ||
-    new PusherClient(process.env.NEXT_PUBLIC_PUSHER_APP_KEY!, {
-        cluster: process.env.PUSHER_APP_CLUSTER!,
-    });
-
+  export const pusherClient = new PusherClient('aeeac1f661fd56784a9b', {
+    cluster: 'ap2',  // replace with your cluster
+  })
 if (process.env.NODE_ENV !== "production") {
     (globalThis as GlobalPusher).pusherServer = pusherServer;
     (globalThis as GlobalPusher).pusherClient = pusherClient;

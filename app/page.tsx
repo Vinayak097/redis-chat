@@ -39,6 +39,7 @@ export default async function Home() {
   const layout =  (await cookies()).get("react-resizable-panels:layout");
   const defaultLayout= layout? JSON.parse(layout.value):undefined
   await redis.set("foo" , "bar")
+  
   return (
     <main className='flex h-screen flex-col items-center justify-center p-4 md:px-24 py-32 gap-4'>
 			<PreferencesTab />
