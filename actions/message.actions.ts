@@ -82,5 +82,5 @@ export const getMessages=async(selectedUserId:string,currentUserId:string)=>{
 	const pipeline=redis.pipeline()
 	messageIds.forEach((messageId)=>pipeline.hgetall(messageId as string))
 	const messages=(await pipeline.exec()) as Message[]
-	return messages
+	return messages || []
 }
