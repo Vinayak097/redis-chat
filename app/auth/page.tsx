@@ -12,7 +12,14 @@ const page = async () => {
       <div className='flex-1 flex overflow-hidden dark:bg-[#651c2b55] bg-[#651c2b] relative justify-center items-center'>
         {/* Background Redis Logo - Adjusted position and opacity */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-         
+          <Image
+            src={'/redis-logo.svg'}
+            width={400}
+            height={400}
+            alt='Redis Logo'
+            className='absolute -left-1/4 opacity-10 -bottom-32 select-none'
+            priority
+          />
         </div>
 
         {/* Content Section - Improved stacking and spacing */}

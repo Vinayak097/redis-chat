@@ -34,15 +34,13 @@ const ChatBottomBar = () => {
 	const [playSound4] = useSound("/sounds/keystroke4.mp3");
 
 	const [playNotificationSound] = useSound("/sounds/notification.mp3");
-
 	const playSoundFunctions = [playSound1, playSound2, playSound3, playSound4];
 
 	const playRandomKeyStrokeSound = () => {
 		const randomIndex = Math.floor(Math.random() * playSoundFunctions.length);
 		if(soundEnabled){
- playSoundFunctions[randomIndex]();
-		}
-		
+ 			playSoundFunctions[randomIndex]();
+		}		
 	};
 
 	const { mutate: sendMessage, isPending } = useMutation({
@@ -54,11 +52,7 @@ const ChatBottomBar = () => {
 		if(selectedUser){
 			sendMessage({ content: message, messageType: "text", receiverId: selectedUser.id });
 			setMessage("");
-
 		}
-		
-		
-
 		textAreaRef.current?.focus();
 	};
 
@@ -67,7 +61,6 @@ const ChatBottomBar = () => {
 			e.preventDefault();
 			handleSendMessage();
 		}
-
 		if (e.key === "Enter" && e.shiftKey) {
 			e.preventDefault();
 			setMessage(message + "\n");
@@ -77,7 +70,6 @@ const ChatBottomBar = () => {
 	useEffect(() => {
 		const channelName = `${currentUser?.id}__${selectedUser?.id}`.split("__").sort().join("__");
 		const channel = pusherClient?.subscribe(channelName);
-
 		const handleNewMessage = (data: { message: Message }) => {
 			queryClient.setQueryData(["messages", selectedUser?.id], (oldMessages: Message[]) => {
 				return [...oldMessages, data.message];
@@ -87,10 +79,7 @@ const ChatBottomBar = () => {
 				playNotificationSound();
 			}
 		};
-
 		channel.bind("newMessage", handleNewMessage);
-
-		// ! Absolutely important, otherwise the event listener will be added multiple times which means you'll see the incoming new message multiple times
 		return () => {
 			channel.unbind("newMessage", handleNewMessage);
 			pusherClient.unsubscribe(channelName);
@@ -118,16 +107,15 @@ const ChatBottomBar = () => {
 					}}
 				</CldUploadWidget>
 			)}
-<Dialog open={!!imgUrl} onOpenChange={(open) => !open && setImgUrl("")}>
-
+			<Dialog open={!!imgUrl} onOpenChange={(open) => !open && setImgUrl("")}>
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>Image Preview</DialogTitle>
 					</DialogHeader>
 					<div className='flex justify-center items-center relative h-96 w-full mx-auto'>
 					{imgUrl && (
-  <Image src={imgUrl} alt='Image Preview' fill className='object-contain' />
-)}
+  		<Image src={imgUrl} alt='Image Preview' fill className='object-contain' />
+			)}
 					</div>
 
 					<DialogFooter>

@@ -51,7 +51,7 @@ export async function sendMessageAction({ content, messageType, receiverId }: Se
 		return
 	}
 	const channelName=`${senderId}__${receiverId}`.split("__").sort().join("__")
-
+	
 	await pusherServer?.trigger(channelName,'newMessage',{
 		message:{senderId,content,timestamp,messageType}
 	})
